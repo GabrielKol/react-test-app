@@ -16,16 +16,18 @@ class Home extends Component {
 
   }
   handleOriginalChange = (e) => {
-    console.log("original changed");
-    this.setState({
-      originalPhoto: URL.createObjectURL(e.target.files[0])
-    })
+    if(e.target.files[0]) {
+      this.setState({
+        originalPhoto: URL.createObjectURL(e.target.files[0])
+      })
+    }
   }
   handleProtectedChange = (e) => {
-    console.log("protected changed");
-    this.setState({
-      protectedPhoto: URL.createObjectURL(e.target.files[0])
-    })
+    if(e.target.files[0]) {
+      this.setState({
+        protectedPhoto: URL.createObjectURL(e.target.files[0])
+      })
+    }
   }
   render() {
     const { classes } = this.props;
@@ -37,13 +39,13 @@ class Home extends Component {
           <Grid item xs={12} sm={5} lg={4} xl={3}>
             <Paper className={classes.paper}>
               <Grid container spacing={16}>
-                <Grid item xs={12}>
-                  <img src={this.state.originalPhoto} alt="original" ></img>
+                <Grid item xs={12} style={{height:300}}>
+                  <img src={this.state.originalPhoto} alt="original"></img>
                 </Grid>
                 <Grid item xs={12}>
                   <input accept="image/*" className={classes.input}  id="contained-button-file-original" multiple type="file" onChange={(e) => {this.handleOriginalChange(e)}}/>
                   <label htmlFor="contained-button-file-original" style={{flex:1}}>
-                    <Button fullWidth variant="contained" color="primary" className={classes.button}>
+                    <Button fullWidth variant="contained" component="span" color="primary" className={classes.button}>
                       Upload Original Photo
                     </Button>
                   </label>
@@ -52,16 +54,16 @@ class Home extends Component {
             </Paper>
           </Grid>
 
-          <Grid item xs={12} sm={5} lg={4} xl={3}>
-            <Paper className={classes.paper}>
+          <Grid item xs={12} sm={5} lg={4} xl={3} >
+            <Paper className={classes.paper} >
               <Grid container spacing={16}>
-                <Grid item xs={12}>
+                <Grid item xs={12} style={{height:300}}>
                   <img src={this.state.protectedPhoto} alt="protected"></img>
                 </Grid>
                 <Grid item xs={12}>
                   <input accept="image/*" className={classes.input}  id="contained-button-file-protected" multiple type="file" onChange={(e) => {this.handleProtectedChange(e)}}/>
                   <label htmlFor="contained-button-file-protected" style={{flex:1}}>
-                    <Button fullWidth variant="contained" color="primary" className={classes.button}>
+                    <Button fullWidth variant="contained" component="span" color="primary" className={classes.button}>
                       Upload Protected Photo
                     </Button>
                   </label>
